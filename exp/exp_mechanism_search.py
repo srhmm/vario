@@ -7,7 +7,7 @@ from vario.utils_context_partition import pi_matchto_pi_exact, enum_context_part
 
 
 def test_mechanism_search(n_reps=100, test_greedy_version=False):
-
+    print(f"Evaluating VARIO_PI: Discovery of Causal Mechanism Changes (reps={n_reps})")
     greedy = test_greedy_version
     n_nodes = 5
     n_contexts = 5
@@ -54,11 +54,11 @@ def test_mechanism_search(n_reps=100, test_greedy_version=False):
             TN[k], FN[k] = TN[k] + tn, FN[k] + fn
 
 
-    print ("Accuracy on exactly discovering context partitions\nwith K groups in the context partition/K-1 causal mechanism changes")
+    print ("\nAccuracy on exactly discovering context partitions\nwith K groups in the context partition/K-1 causal mechanism changes")
     for k in range(n_contexts):
         print(f"\tK={k+1}: {np.round(exact_matches[k]/(exact_matches[k]+no_matches[k]),2)} ({exact_matches[k]}/{exact_matches[k]+no_matches[k]})")
 
-    print("F1 (TP, TN, FP, FN) on correctly assigning pairs of contexts to the same/a different group\nwith K groups in the context partition/K-1 causal mechanism changes")
+    print("\nF1 (TP, TN, FP, FN) on correctly assigning pairs of contexts to the same/a different group\nwith K groups in the context partition/K-1 causal mechanism changes")
     for k in range(n_contexts-1):
         print(f"\tK={k+1}: {np.round(TP[k]/(TP[k]+1/2*(FP[k]+FN[k])),2)} ({TP[k]},{TN[k]},{FP[k]},{FN[k]})")
 
