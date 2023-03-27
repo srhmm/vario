@@ -1,9 +1,9 @@
 import more_itertools as mit
 from typing import List
 
-from causal_mechanism_search import causal_mechanism_search
-from partition_record import PartitionRecord
-from utils_context_partition import accel_asc
+from vario.causal_mechanism_search import causal_mechanism_search
+from vario.partition_record import PartitionRecord
+from vario.utils_context_partition import accel_asc
 
 
 def causal_variable_search(data_each_context: List, iy: int, ix: List, greedy_mechanism_search=True, verbose=False):

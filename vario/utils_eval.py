@@ -1,7 +1,7 @@
 import numpy as np
 from graphical_models import GaussDAG
 
-from utils_context_partition import pi_matchto_pi_pairwise, pi_matchto_pi_exact
+from vario.utils_context_partition import pi_matchto_pi_pairwise, pi_matchto_pi_exact
 
 
 def eval_causal_edges(causal_edges, true_partitions, true_dag:GaussDAG):

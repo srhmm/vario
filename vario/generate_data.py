@@ -1,14 +1,13 @@
 import numpy as np
 from causaldag import rand
 from typing import List
-
 from graphical_models import GaussDAG
 
-from linear_dag import LinearDAG
-from linear_regression import linear_regression
-from utils import cantor_pairing, scale_data
-from utils_arc_weights import gen_arc_weights_pi
-from utils_context_partition import random_context_partition, partition_to_groupmap
+from vario.linear_dag import LinearDAG
+from vario.linear_regression import linear_regression
+from vario.utils import cantor_pairing, scale_data
+from vario.utils_arc_weights import gen_arc_weights_pi
+from vario.utils_context_partition import random_context_partition, partition_to_groupmap
 
 
 def generate_DAG(n_nodes, seed, node_density=.5):

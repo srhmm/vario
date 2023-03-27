@@ -1,8 +1,7 @@
 from typing import List
 
-from causal_variable_search import subset_search
-from partition_record import PartitionRecord
-
+from vario.causal_variable_search import subset_search
+from vario.partition_record import PartitionRecord
 
 def causal_dag_search(data_each_context:List, greedy_mechanism_search=True, verbose=False):
     """ Discovers the causal variables and mechanism changes for all variables.

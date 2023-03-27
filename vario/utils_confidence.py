@@ -1,8 +1,8 @@
 import numpy as np
 import scipy.stats
 
-from linear_projection import LinearProjection
-from utils_context_partition import random_context_partition, pi_valid
+from vario.linear_projection import LinearProjection
+from vario.utils_context_partition import random_context_partition, pi_valid
 
 
 def conf_intervals_gaussian(n_contexts, n_samples = 1000, reps = 100):

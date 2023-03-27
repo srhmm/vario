@@ -1,8 +1,8 @@
-from causal_mechanism_search import causal_mechanism_search
-from causal_variable_search import causal_variable_search
-from causal_dag_search import causal_dag_search
-from generate_data import generate_data_from_DAG
-from utils_eval import eval_causal_edges, eval_partition
+from vario.causal_mechanism_search import causal_mechanism_search
+from vario.causal_variable_search import causal_variable_search
+from vario.causal_dag_search import causal_dag_search
+from vario.generate_data import generate_data_from_DAG
+from vario.utils_eval import eval_causal_edges, eval_partition
 
 if __name__ == '__main__':
     # Example

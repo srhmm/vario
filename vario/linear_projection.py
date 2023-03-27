@@ -1,8 +1,8 @@
 import numpy as np
 
-from linear_regression import linear_regression
-from utils import logg
-from utils_context_partition import partition_to_groupmap
+from vario.linear_regression import linear_regression
+from vario.utils import logg
+from vario.utils_context_partition import partition_to_groupmap
 
 
 class LinearProjection():

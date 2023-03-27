@@ -1,6 +1,6 @@
 import numpy as np
 
-from utils import cantor_pairing
+from vario.utils import cantor_pairing
 
 
 def gen_arc_weights_pi(partition, dag, seed, const_intervention=False):

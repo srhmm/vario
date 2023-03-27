@@ -1,8 +1,7 @@
 import numpy as np
 
-from linear_projection import LinearProjection
-from partition_record import PartitionRecord
-from utils_context_partition import enum_context_partitions, split_partition
+from vario.partition_record import PartitionRecord
+from vario.utils_context_partition import enum_context_partitions, split_partition
 
 from typing import List
 

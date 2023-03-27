@@ -20,3 +20,10 @@ oracle_partition, oracle_score, _ = causal_mechanism_search(data, index_Y, true_
 estim_parents, estim_partition, estim_score, _ = causal_variable_search(data, index_Y,  [n for n in range(n_nodes) if not (n==index_Y)], greedy_mechanism_search=False, verbose=True)
 
 ```
+
+#### Setup
+
+```
+cd vario
+pip install -e . 
+```

@@ -1,6 +1,6 @@
 import numpy as np
 from sklearn.linear_model import LogisticRegression
-from linear_regression import coef_rescale
+from vario.linear_regression import coef_rescale
 
 
 def logistic_regression(X, y, scale=True):

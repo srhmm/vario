@@ -1,5 +1,5 @@
-from linear_projection import LinearProjection
-from utils_confidence import conf_intervals_gaussian, confident_score
+from vario.linear_projection import LinearProjection
+from vario.utils_confidence import conf_intervals_gaussian, confident_score
 
 
 class PartitionRecord:
