@@ -3,13 +3,12 @@ from typing import List
 
 from vario.causal_mechanism_search import causal_mechanism_search
 from vario.partition_record import PartitionRecord
-from vario.utils_context_partition import accel_asc
 
 
 def causal_variable_search(data_each_context: List, iy: int, ix: List, greedy_mechanism_search=True, verbose=False):
     """ Discovers the causal variables (and mechanism changes) for a target variable Y.
 
-    :param data_each_context
+    :param data_each_context: list
     :param iy: target Y
     :param ix: covariates X
     :return: causal parents, partition
@@ -21,7 +20,8 @@ def causal_variable_search(data_each_context: List, iy: int, ix: List, greedy_me
     partition, score = partition_record.get_partition(iy)
     parents, _ = partition_record.get_causal_variables(iy)
 
-    print("Estimated parents, partition, score:\n{", ','.join([str(x) for x in parents]), "}",  partition, round(score,2))
+    if verbose:
+        print("Estimated parents, partition, score:\n{", ','.join([str(x) for x in parents]), "}",  partition, round(score,2))
     return parents, partition, score, partition_record
 
 
@@ -44,5 +44,4 @@ def subset_search(partition_record, iy, ix, greedy, verbose):
         candidate_parents = [s for s in subset]
         _, _, partition_record = causal_mechanism_search(partition_record.data_each_context, iy, candidate_parents,
                                                          greedy=greedy, partition_record=partition_record)
-
     return partition_record

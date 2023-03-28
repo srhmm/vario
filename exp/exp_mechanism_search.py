@@ -3,7 +3,7 @@ import numpy as np
 from vario.causal_mechanism_search import causal_mechanism_search
 from vario.generate_data import generate_data_from_DAG
 from vario.utils_confidence import confident_score, conf_intervals_gaussian
-from vario.utils_context_partition import pi_matchto_pi_exact, enum_context_partitions, pi_matchto_pi_pairwise
+from vario.utils_context_partition import enum_context_partitions, pi_matchto_pi_pairwise, pi_matchto_pi_exact
 
 
 def test_mechanism_search(n_reps=100, test_greedy_version=False):
@@ -15,6 +15,7 @@ def test_mechanism_search(n_reps=100, test_greedy_version=False):
     partitions = enum_context_partitions(n_contexts, permute=False)
     conf_intervals, _ = conf_intervals_gaussian(n_contexts)
 
+    # Partition Discovery
     exact_matches, no_matches = [0 for _ in range(n_contexts)], [0 for _ in range(n_contexts)]
     TP, FP, TN, FN = [0 for _ in range(n_contexts)], [0 for _ in range(n_contexts)],[0 for _ in range(n_contexts)], [0 for _ in range(n_contexts)]
 
@@ -27,8 +28,11 @@ def test_mechanism_search(n_reps=100, test_greedy_version=False):
                                                                               min_interventions=5, max_interventions=5,
                                                                               scale=False, verbose=False, seed=seed)
 
+
             indices_X = true_dag.parents_of(index_Y)
-            estim_partition, estim_score, _ = causal_mechanism_search(data, index_Y, indices_X, greedy=greedy, verbose=False)
+            estim_partition, estim_score, _ = causal_mechanism_search(data, index_Y, indices_X, greedy=greedy,
+                                                                      verbose=False)
+
 
             is_significant = confident_score(conf_intervals, estim_partition, estim_score, n_contexts)
 
@@ -55,12 +59,12 @@ def test_mechanism_search(n_reps=100, test_greedy_version=False):
 
 
     print ("\nAccuracy on exactly discovering context partitions\nwith K groups in the context partition/K-1 causal mechanism changes")
-    for k in range(n_contexts):
-        print(f"\tK={k+1}: {np.round(exact_matches[k]/(exact_matches[k]+no_matches[k]),2)} ({exact_matches[k]}/{exact_matches[k]+no_matches[k]})")
+    for k in range(n_contexts-1):
+        print(f"\tK={k+1}: {np.round(exact_matches[k]/max(exact_matches[k]+no_matches[k],1),2)} ({exact_matches[k]}/{exact_matches[k]+no_matches[k]})")
 
     print("\nF1 (TP, TN, FP, FN) on correctly assigning pairs of contexts to the same/a different group\nwith K groups in the context partition/K-1 causal mechanism changes")
     for k in range(n_contexts-1):
-        print(f"\tK={k+1}: {np.round(TP[k]/(TP[k]+1/2*(FP[k]+FN[k])),2)} ({TP[k]},{TN[k]},{FP[k]},{FN[k]})")
+        print(f"\tK={k+1}: {np.round(TP[k]/max(TP[k]+1/2*(FP[k]+FN[k]),1),2)} ({TP[k]},{TN[k]},{FP[k]},{FN[k]})")
 
     #If there are no groups, F1 score doesn't make much sense, as there are no TPs (and we want TNs)
     k = n_contexts-1

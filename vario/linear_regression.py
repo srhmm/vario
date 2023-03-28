@@ -1,13 +1,8 @@
-import time
-
 import numpy as np
 from sklearn.linear_model import LinearRegression
-import matplotlib.pyplot as plt
-
-
 
 def linear_regression(X, y, scale=True):
-    """Given continuois data X,y in several contexts or groups, linear regression per group
+    """Given continuous data X,y in several contexts or groups, linear regression per group
 
     :param X: X, list of np.arrays
     :param y: y, continuous

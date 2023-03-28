@@ -6,7 +6,7 @@ from vario.partition_record import PartitionRecord
 def causal_dag_search(data_each_context:List, greedy_mechanism_search=True, verbose=False):
     """ Discovers the causal variables and mechanism changes for all variables.
 
-    :param data_each_context
+    :param data_each_context: list
     :return: causal edges and partitions for all targets
     """
     partition_record = PartitionRecord(data_each_context)
@@ -28,8 +28,6 @@ def causal_dag_search(data_each_context:List, greedy_mechanism_search=True, verb
             parents, _ = partition_record.get_causal_variables(iy)
             if len(parents):
                 print("\t ", "Node", iy, ":",  ((" -> "+str(iy)+", ").join([str(p) for p in parents])), "->", iy)
-
-
 
         #print("Estimated parents, partition, score:\n{", ','.join([str(x) for x in parents]), "}",  partition, round(score,2))
     return partition_record.causal_edges

@@ -238,7 +238,6 @@ class PartitionRecord:
                 pa = []
             self.causal_edges[hashY] = pi, score, pa, iy
 
-
     def clear_target(self):
         self._partition_cache = {}
         self._candidate_edges = {}

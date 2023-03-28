@@ -4,7 +4,7 @@ from graphical_models import GaussDAG
 from vario.utils_context_partition import pi_matchto_pi_pairwise, pi_matchto_pi_exact
 
 
-def eval_causal_edges(causal_edges, true_partitions, true_dag:GaussDAG):
+def eval_causal_edges(causal_edges, true_partitions, true_dag:GaussDAG, verbose=False):
     match, nomatch = 0,0
     adj = np.zeros((len(true_dag.nodes), len(true_dag.nodes)))
 
@@ -33,11 +33,30 @@ def eval_causal_edges(causal_edges, true_partitions, true_dag:GaussDAG):
                 else:
                     tn = tn + 1
 
-    print("\n--- Evaluation of DAG search---")
-    print("Correct Partitions: ", match, "/", nomatch+match)
-    print("Causal (TP) edges: ", tp, "/", tp+fn)
-    print("Anticausal (FP): ", fp_rev, "", ", Spurious (FP): ", fp, ", TN:", tn)
+    if verbose:
+        print("\n--- Evaluation of DAG search---")
+        print("Correct Partitions: ", match, "/", nomatch+match)
+        print("Causal (TP) edges: ", tp, "/", tp+fn)
+        print("Anticausal (FP): ", fp_rev, "", ", Spurious (FP): ", fp, ", TN:", tn)
+    return tp, fp, fp_rev, tn, fn
 
+def eval_causal_edge (parents, target, true_dag:GaussDAG):
+    tp, fn, fp, fp_rev, tn = 0, 0, 0, 0, 0
+    for i in true_dag.nodes:
+            if (i, target) in true_dag.arcs:
+                if i in parents:
+                    tp = tp + 1
+                else:
+                    fn = fn + 1
+            else:
+                if i in parents:
+                    if (target, i) in true_dag.arcs:
+                        fp_rev = fp_rev + 1
+                    else:
+                        fp = fp + 1
+                else:
+                    tn = tn + 1
+    return tp, fp, fp_rev, tn, fn
 
 def eval_partition(partition, true_partition):
     match, nomatch = pi_matchto_pi_exact(partition, true_partition)

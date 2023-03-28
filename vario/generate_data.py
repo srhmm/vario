@@ -1,12 +1,11 @@
 import numpy as np
 from causaldag import rand
 from typing import List
-from graphical_models import GaussDAG
 
 from vario.linear_dag import LinearDAG
 from vario.linear_regression import linear_regression
-from vario.utils import cantor_pairing, scale_data
-from vario.utils_arc_weights import gen_arc_weights_pi
+from vario.utils import cantor_pairing
+from vario.utils_data import gen_arc_weights_pi, scale_data
 from vario.utils_context_partition import random_context_partition, partition_to_groupmap
 
 

@@ -5,7 +5,7 @@ from sklearn.metrics import adjusted_rand_score, adjusted_mutual_info_score
 from typing import List
 
 def split_partition(partition:List[List[int]]):
-    """ All ways to split a partition into another that has one additional group
+    """ All ways to split a partition into another that has one additional group.
 
     :param partition: context partition
     :return:
@@ -74,15 +74,15 @@ def enum_context_partitions(n_contexts, permute=True, k_min=1, k_max=None):
 
 def random_context_partition(n_contexts, random_state=np.random.RandomState(1), permute=True,
             k_min=None, k_max=None, single_context_groups=False):
-    """ Chooses a partition at random
+    """ Samples a partition.
 
     :param n_contexts: number of contexts
     :param random_state: random seed state
     :param permute: whether to consider the order of context groups
     :param k_min: min number of groups
     :param k_max: max number of groups
-    :param single_context_groups: partitions are of shape [[0],[1],[2,3,4]] ie all but one have size one
-    (application: one observational group, interventional contexts)
+    :param single_context_groups: partitions are of shape [[0],[1],[2,3,4]] ie all but one have size one (application: one observational group, interventional contexts)
+
     :return: sampled partition
     """
     #default: a random number of groups
@@ -116,7 +116,7 @@ def random_context_partition(n_contexts, random_state=np.random.RandomState(1), 
 
 
 def pi_valid(partition: List[List[int]], n_contexts):
-    """ Make sure partition has valid format, List of groups, group is a list of indices for the context.
+    """ Make sure partition has valid format: a list of groups, where each group is a list of indices/context numbers.
 
     :param partition: partition
     :param n_contexts: number of contexts
@@ -140,7 +140,7 @@ def pi_matchto_pi(pi_star :list, pi_guess:list, C_n):
 
 
 def pi_matchto_pi_exact(pi_star, pi_guess):
-    """ Matches partitions exactly.
+    """ Matches partitions exactly: checks whether all contexts are in the correct group.
 
     :param pi_star: ground truth
     :param pi_guess: predicted
@@ -161,7 +161,7 @@ def pi_matchto_pi_exact(pi_star, pi_guess):
     return 0,1
 
 def pi_matchto_pi_pairwise(pi_star, pi_guess, C_n):
-    """ Matches partitions pairwise.
+    """ Matches partitions pairwise: for each pair of contexts, checks whether they are correctly assigned to the same, resp. a different, group.
 
             Parameters
             ----------

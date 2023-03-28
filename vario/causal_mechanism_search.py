@@ -1,9 +1,9 @@
 import numpy as np
+from typing import List
 
 from vario.partition_record import PartitionRecord
 from vario.utils_context_partition import enum_context_partitions, split_partition
 
-from typing import List
 
 
 def causal_mechanism_search(data_each_context: List,
@@ -12,7 +12,7 @@ def causal_mechanism_search(data_each_context: List,
     """ Discovers a partition of n contexts into k groups.
     If contexts i,j are in the same group, the functions fi: X -> Y and fj : X -> Y in these contexts are similar.
 
-    :param data_each_context:
+    :param data_each_context: list
     :param iy: which data row is target/child Y
     :param ix: which data rows are covariates/causal parents X
     :param greedy: whether to traverse all possible partitions of the contexts or greedy top-down variant (cubic time)

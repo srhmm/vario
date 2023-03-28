@@ -8,7 +8,7 @@ from vario.utils_context_partition import random_context_partition, pi_valid
 def conf_intervals_gaussian(n_contexts, n_samples = 1000, reps = 100):
     """ Returns, for each number of groups k, a confidence interval of the scores that we likely obtained at random for a partition with that number of groups (assuming scores Gaussian distributed, and "null data" is Gaussian distributed)
 
-    :param n_contexts:
+    :param n_contexts: number of contexts
     :return:
     """
     scores = [[None for _ in range(reps)] for _ in range(n_contexts-1)] # k=2,...k=n_contexts.
