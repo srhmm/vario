@@ -82,21 +82,14 @@ def generate_data_from_DAG(n_nodes:int,n_contexts:int,
 
     if verbose:
         print("\n--- Generating a DAG --- ")
-        print("Target Y:", target)
-        print("Partition:", partitions_X[target])
-        print("Causal parents:", parents)
-        print("Causal children:", children)
-        print("Mechanism changes:")
+        print(f"Target Y: {target} \nPartition: {partitions_X[target]}")
+        print(f"Causal parents: {parents} \nCausal children: {children} \n Mechanism changes:")
         for node in dag.nodes:
-            print("\t", "Node", node, ":", partitions_X[node])
-        print("Edge, edge weights per context:")
+            print(f"\tNode {node}: {partitions_X[node]}\nEdge, edge weights per context:")
         for node in dag.nodes:
-            #if not p in parents and not p in children:
-            #    continue
 
             for (i,j) in dag.arcs:
                 if node==j:
-                    #if #j == target and i == node or j == node:
                     w = [0 for _ in range(n_contexts)]
                     for c_i in range(n_contexts):
                         if (i, j) in dag_each_context[c_i].arc_weights:
@@ -107,8 +100,7 @@ def generate_data_from_DAG(n_nodes:int,n_contexts:int,
                          in range(n_contexts)])
                     data_Y = np.array([data_each_context[c_i][:, j] for c_i in range(n_contexts)])
                     estim_w = linear_regression(data_X, data_Y, scale=False)
-
-                    print("\t", i, "->", j, "\t", w, "\t", [round(w[0],2) for w in estim_w]) #, "\t", partitions_X[j])
+                    print(f"\t{i} -> {j}\t{w}\t{[round(w[0],2) for w in estim_w]}")
     partitions_each_node = partitions_X
 
     return data_each_context, target, dag, partitions_each_node

@@ -35,9 +35,9 @@ def eval_causal_edges(causal_edges, true_partitions, true_dag:GaussDAG, verbose=
 
     if verbose:
         print("\n--- Evaluation of DAG search---")
-        print("Correct Partitions: ", match, "/", nomatch+match)
-        print("Causal (TP) edges: ", tp, "/", tp+fn)
-        print("Anticausal (FP): ", fp_rev, "", ", Spurious (FP): ", fp, ", TN:", tn)
+        print(f"Correct Partitions: {match}/{nomatch+match}")
+        print(f"Causal (TP) edges: {tp}/{tp+fp}")
+        print(f"Anticausal (FP): {fp_rev}, Spurious (FP): {fp}, TN: {tn}")
     return tp, fp, fp_rev, tn, fn
 
 def eval_causal_edge (parents, target, true_dag:GaussDAG):
@@ -58,7 +58,9 @@ def eval_causal_edge (parents, target, true_dag:GaussDAG):
                     tn = tn + 1
     return tp, fp, fp_rev, tn, fn
 
-def eval_partition(partition, true_partition):
+def eval_partition(partition, true_partition, verbose=True):
     match, nomatch = pi_matchto_pi_exact(partition, true_partition)
 
-    print("Correct Partitions: ", match, "/", nomatch+match)
+    if verbose:
+        print(f"Correct Partitions: {match} /{nomatch+match}")
+    return match, nomatch

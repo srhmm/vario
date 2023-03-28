@@ -47,9 +47,7 @@ def greedy_mechanism_search(pi_record: PartitionRecord, iy: int, ix: List, verbo
     best_pi_atk = Piall
 
     if verbose:
-        print("\n--- Top Down Tree Search for Partitions ---")
-        print("Target: Y =", iy)
-        print("\t1 Group:", round(best_score_atk, 2), best_pi_atk)
+        print(f"\n--- Top Down Tree Search for Partitions ---\nTarget: Y = {iy}\t 1 Group: {round(best_score_atk, 2)} {best_pi_atk}")
 
     # Increase the number of mechanism changes
     for k in range(2, linmap.n_contexts + 1):
@@ -66,13 +64,11 @@ def greedy_mechanism_search(pi_record: PartitionRecord, iy: int, ix: List, verbo
             if score > best_score:
                 best_score, best_pi = score, partition
         if verbose:
-            print("\t" + str(k), "Groups:", round(best_score_atk, 2), best_pi_atk)
+            print(f"\t{str(k)} Groups:{round(best_score_atk, 2)} {best_pi_atk}")
 
     if verbose:
-        print("\tOverall:", round(best_score, 2), best_pi)
+        print(f"\tOverall: {round(best_score, 2)} {best_pi}")
 
-    # for (score, pi) in pi_record.sorted_partitions(iy, ix):
-    #     print(score, pi)
     return best_pi, best_score, pi_record
 
 
@@ -93,8 +89,7 @@ def exhaustive_mechanism_search(pi_record: PartitionRecord, iy: int, ix: List, v
     best_score, best_pi = -np.inf, Pizero
 
     if verbose:
-        print("\n--- Exhaustive Search over Partitions ---")
-        print("Target: Y =", iy)
+        print(f"\n--- Exhaustive Search over Partitions ---\nTarget: Y = {iy}")
     context_partitions = enum_context_partitions(linmap.n_contexts)
     for partition in context_partitions:
 
@@ -107,8 +102,6 @@ def exhaustive_mechanism_search(pi_record: PartitionRecord, iy: int, ix: List, v
         raise RuntimeError("No min found")
 
     if verbose:
-        print("Best Partition:", best_pi, "Score:", round(best_score,2))
+        print(f"Best Partition: {best_pi} Score: {round(best_score,2)}")
 
-    # for (score, pi) in pi_record.sorted_partitions(iy, ix):
-    #     print(score, pi)
     return best_pi, best_score, pi_record

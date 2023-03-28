@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
 
     # Evaluation
-    eval_causal_edges(causal_edges, true_partitions, true_dag)
+    _, _, _, _, _ = eval_causal_edges(causal_edges, true_partitions, true_dag, verbose=True)
 
 
 

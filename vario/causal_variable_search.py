@@ -35,8 +35,7 @@ def subset_search(partition_record, iy, ix, greedy, verbose):
     :return: partition_record
     """
     if verbose:
-        print("\n--- Subset Search for Causal Variables ---")
-        print("Target: Y =", iy)
+        print("\n--- Subset Search for Causal Variables ---\nTarget: Y =", iy)
     subsets = mit.powerset(ix)
     for subset in subsets:
         if len(subset) == 0:
